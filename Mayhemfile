@@ -10,4 +10,4 @@ testsuite:
 
 cmds:
   - cmd: jefferson -d /tmp/jeffout @@
-      libfuzzer: true
+    libfuzzer: true
