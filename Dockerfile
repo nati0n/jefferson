@@ -6,7 +6,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip liblzo2-dev gi
 RUN git clone https://github.com/nati0n/jefferson.git
 WORKDIR /jefferson
 RUN python3 -m pip install -r requirements.txt
+RUN python3 -m pip install -U nuitka
 RUN python3 setup.py install
+RUN python3 -m nuitka /usr/local/bin/jefferson
+
 
 
 ADD ./example_file_system.jffs2 ./example_file_system.jffs2
@@ -14,10 +17,10 @@ ADD ./example_file_system.jffs2 ./example_file_system.jffs2
 # RUN make
 # RUN make install
 
-# FROM ubuntu:20.04 as package
+FROM ubuntu:20.04 as package
 
-# COPY --from=builder /fzf/bin/fzf /fzf
-# COPY --from=builder /fzf/example_history /example_history
+COPY --from=builder /jefferson/jefferson.bin /jefferson
+COPY --from=builder /jefferson/example_file_system.jffs2 /example_file_system.jffs2
 
 # Technically build and 'package'
 # build step with required supporting packages
