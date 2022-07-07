@@ -1,9 +1,7 @@
 project: jefferson
 target: jefferson
 
-duration: 300
-
-tests: null
+duration: 60
 
 testsuite:
   - file://example_file_system.jffs2
